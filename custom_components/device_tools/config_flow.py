@@ -277,7 +277,7 @@ class DeviceToolsConfigFlow(ConfigFlow, domain=DOMAIN):
                                             or device.id,
                                         }
                                     )
-                                    for device in self.device_registry.devices.values().sort()
+                                    for device in self.device_registry.devices.values().sort(key=lambda x: x.name_by_user or x.name or x.id)
                                     if device.id not in other_device_ids
                                     and device.disabled_by is None
                                 ],
