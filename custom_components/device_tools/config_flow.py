@@ -140,7 +140,7 @@ def _schema_entities(
                                 "label": entity.name or entity.entity_id,
                             }
                         )
-                        for entity in er.entities.values()
+                        for entity in sorted(list(er.entities.values()),key=lambda x: x.name or x.id)
                     ],
                     mode=SelectSelectorMode.DROPDOWN,
                     multiple=True,
@@ -533,7 +533,7 @@ class OptionsFlowHandler(OptionsFlow):
         config_entries: list[ConfigEntry] = self.hass.config_entries.async_entries(
             DOMAIN
         )
-        for config_entry in config_entries.sort(key=lambda x:x.entry_id):
+        for config_entry in config_entries:
             if config_entry.entry_id == self.config_entry.entry_id:
                 continue
 
