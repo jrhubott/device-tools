@@ -533,7 +533,7 @@ class OptionsFlowHandler(OptionsFlow):
         config_entries: list[ConfigEntry] = self.hass.config_entries.async_entries(
             DOMAIN
         )
-        for config_entry in config_entries:
+        for config_entry in config_entries.sort(key=lambda x:x.entry_id):
             if config_entry.entry_id == self.config_entry.entry_id:
                 continue
 
